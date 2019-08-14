@@ -4,7 +4,6 @@ import { FormState, FormStateProviderProps, Dispatch, Action } from "../types";
 
 const initialState: FormState = {
   currentUser: null,
-  loading: true,
   error: false,
   errorMessage: "",
   success: false,

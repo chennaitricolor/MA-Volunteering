@@ -7,12 +7,11 @@ import TypePicker from "./TypePicker";
 import { useForm, register } from "../context/form";
 import useLocalStorage from "../hooks/useLocalStorage";
 import * as actions from "../actionTypes";
+import * as R from "ramda";
 
 const App: React.FC = () => {
   const [state, dispatch] = useForm();
   const [user] = useLocalStorage("user", JSON.stringify({}));
-
-  const { currentUser, loading } = state;
 
   const handleSubmit = React.useCallback(
     event => {
@@ -22,35 +21,33 @@ const App: React.FC = () => {
     [dispatch, state]
   );
 
+  console.log(user);
+
   React.useEffect(() => {
     if (user) {
       dispatch({ type: actions.SET_USER, payload: user });
     }
   }, [user, dispatch]);
 
-  return (
-    <div className="App">
-      {user && (
+  if (!R.isEmpty(user)) {
+    return (
+      <div className="App">
         <Router>
           <AppBar />
-          {!loading && currentUser && (
-            <Switch>
-              <Route
-                path="/"
-                exact
-                render={() => <UserDetails user={currentUser} />}
-              />
-              <Route path="/interests/" render={() => <InterestPicker />} />
-              <Route
-                path="/type/"
-                render={() => <TypePicker submit={handleSubmit} />}
-              />
-            </Switch>
-          )}
+          <Switch>
+            <Route path="/" exact render={() => <UserDetails />} />
+            <Route path="/interests/" render={() => <InterestPicker />} />
+            <Route
+              path="/type/"
+              render={() => <TypePicker submit={handleSubmit} />}
+            />
+          </Switch>
         </Router>
-      )}
-    </div>
-  );
+      </div>
+    );
+  }
+
+  return <div>Error: User not register in the platform</div>;
 };
 
 export default App;

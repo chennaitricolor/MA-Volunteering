@@ -11,12 +11,28 @@ Hosting: Firebase hosting
 ## Project structure
 
 app
+
 └── client (SPA code)
+
 └── api (API code)
 
 ## Setup
 
 ### SPA
+
+Client side requires for `user` key stored in `localStorage`. Please initialize the `user` key with string:
+
+```
+
+{"name":"John Doe",
+ "mobileNumber":"1234567890",
+ "email":"abc123xyz@gmail.com",
+ "gender":"Male",
+ "dateOfBirth":"26 Aug 1998"}
+
+```
+
+This information will set when `index.html` loads after authentication with the platform.
 
 _Development_
 

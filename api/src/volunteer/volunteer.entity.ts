@@ -8,12 +8,7 @@ import {
 
 import { Interest } from '../interest/interest.entity';
 import { Org } from '../org/org.entity';
-
-enum Term {
-  OneTime = 'onetime',
-  ShortTerm = 'shortterm',
-  LongTerm = 'longterm',
-}
+import { Term } from '../types';
 
 @Entity()
 export class Volunteer {
@@ -33,11 +28,11 @@ export class Volunteer {
   })
   term: Term;
 
-  @ManyToMany(type => Org)
+  @ManyToMany(type => Org, { cascade: true })
   @JoinTable()
   orgs: Org[];
 
-  @ManyToMany(type => Interest)
+  @ManyToMany(type => Interest, { cascade: true })
   @JoinTable()
   interests: Interest[];
 }

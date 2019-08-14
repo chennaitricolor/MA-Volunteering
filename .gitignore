@@ -20,5 +20,5 @@ api/dist
 */yarn-error.log*
 
 # config
-src/config/firebase.js
+client/src/config/firebase.js
 api/ormconfig.js

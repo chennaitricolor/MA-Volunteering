@@ -6,6 +6,11 @@ export interface User {
   dateOfBirth: string;
 }
 
+export interface Interest {
+  id: number;
+  name: string;
+}
+
 export interface Action {
   type: string;
 
@@ -16,7 +21,6 @@ export type Dispatch = (action: Action) => void;
 
 export type FormState = {
   currentUser: User | null;
-  loading: boolean;
   error: boolean;
   interests: Array<string>;
   notify: boolean;
