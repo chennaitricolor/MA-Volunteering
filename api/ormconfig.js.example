@@ -1,0 +1,16 @@
+const SOURCE_PATH = process.env.NODE_ENV === 'production' ? 'dist' : 'src';
+
+module.exports = {
+  type: 'postgres',
+  host: 'localhost',
+  port: 5432,
+  username: 'smartcity',
+  password: 'secret',
+  database: 'smartcity',
+  entities: [`${SOURCE_PATH}/**/*.entity{.ts,.js}`],
+  synchronize: true,
+  migrations: ['db/migration/*.js'],
+  cli: {
+    migrationsDir: 'db/migrations',
+  },
+};

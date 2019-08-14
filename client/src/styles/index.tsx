@@ -1,0 +1,37 @@
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Radio, { RadioProps } from "@material-ui/core/Radio";
+import Button, { ButtonProps } from "@material-ui/core/Button";
+
+const StyledRadio = withStyles({
+  root: {
+    color: "#2C67CB",
+    "&$checked": {
+      color: "#2C67CB"
+    }
+  },
+  checked: {}
+})((props: RadioProps) => <Radio color="default" {...props} />);
+
+const StyledButton = withStyles({
+  root: {
+    margin: "1rem auto",
+    minWidth: "23rem",
+    minHeight: "3.5rem",
+    background: "#1366D2",
+    borderRadius: "3rem",
+    width: "3rem",
+    height: "2rem",
+    fontWeight: "bold",
+    color: "#fff"
+  },
+  label: {
+    fontSize: "1rem",
+    textTransform: "capitalize",
+    textDecoration: "none"
+  }
+})((props: ButtonProps) => (
+  <Button disableRipple disableFocusRipple color="default" {...props} />
+));
+
+export { StyledRadio, StyledButton };
