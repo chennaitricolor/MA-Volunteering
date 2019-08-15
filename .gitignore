@@ -20,6 +20,5 @@ api/dist
 */yarn-error.log*
 
 # config
-client/src/config/firebase.js
 api/ormconfig.js
-client/.env
+client/.env.production

@@ -5,10 +5,10 @@ import { Term } from '../types';
 
 export class CreateVolunteerDTO {
   readonly email: string;
-  readonly notifyFlag: boolean;
+  readonly notify: boolean;
   readonly term: Term;
 
-  readonly orgs: Org[] | [];
+  readonly prevOrgs?: Org[];
 
   readonly interests: Interest[] | [];
 }

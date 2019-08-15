@@ -132,7 +132,7 @@ const TypePicker: React.FC<IProps> = props => {
             />
           </FormGroup>
         </FormControl>
-        <Button onClick={() => submit()}>Submit</Button>
+        <Button onClick={e => submit(e)}>Submit</Button>
       </div>
     </div>
   );

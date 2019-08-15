@@ -3,7 +3,13 @@ import * as actions from "../actionTypes";
 import { FormState, FormStateProviderProps, Dispatch, Action } from "../types";
 
 const initialState: FormState = {
-  currentUser: null,
+  currentUser: {
+    name: "",
+    email: "",
+    mobileNumber: "",
+    gender: "",
+    dateOfBirth: ""
+  },
   error: false,
   errorMessage: "",
   success: false,
@@ -86,14 +92,4 @@ function useForm(): [FormState, Dispatch] {
   return [useFormState(), useFormDispatch()];
 }
 
-async function register(dispatch, state) {
-  dispatch({ type: actions.REGISTRATION_REQUEST });
-  try {
-    // TODO: Add function call to api to registerwith state
-    dispatch({ type: actions.REGISTRATION_SUCCESS });
-  } catch (error) {
-    dispatch({ type: actions.REGISTRATION_FAILED, payload: error.message });
-  }
-}
-
-export { FormStateProvider, useForm, register };
+export { FormStateProvider, useForm };

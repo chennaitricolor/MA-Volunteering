@@ -3,6 +3,7 @@
 insert into interest
   (name)
 values
+  ('any from below'),
   ('children and youth'),
   ('civic sense'),
   ('education and literacy'),

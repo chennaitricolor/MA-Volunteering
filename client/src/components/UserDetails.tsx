@@ -1,9 +1,8 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { StyledButton as Button } from "../styles";
+import Button from "./NavButton";
 import { useForm } from "../context/form";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -76,56 +75,50 @@ const UserDetails: React.FC<IProps> = () => {
 
   const { currentUser: user } = state;
 
-  if (user && user.name) {
-    const { name, email, mobileNumber, gender, dateOfBirth } = user;
+  const { name, email, mobileNumber, gender, dateOfBirth } = user;
 
-    return (
-      <div className={classes.root}>
-        <div className={classes.heading}>
-          <div className={classes.titleContainer}>
-            <Typography component="h1" className={classes.title}>
-              Your Details
-            </Typography>
-            <a className={classes.profileLink} href="/">
-              View Profile
-            </a>
-          </div>
-          <Typography variant="subtitle1" className={classes.subTitle}>
-            Info is taken from profile. Visit profile to change the details.
+  return (
+    <div className={classes.root}>
+      <div className={classes.heading}>
+        <div className={classes.titleContainer}>
+          <Typography component="h1" className={classes.title}>
+            Your Details
           </Typography>
+          <a className={classes.profileLink} href="/">
+            View Profile
+          </a>
         </div>
-        <div className={classes.userDetails}>
-          <div className={classes.userDetail}>
-            <div className={classes.fieldName}>Full name</div>
-            <div className={classes.fieldValue}>{name}</div>
-          </div>
-          <div className={classes.userDetail}>
-            <div className={classes.fieldName}>Mobile no</div>
-            <div className={classes.fieldValue}>{mobileNumber}</div>
-          </div>
-          <div className={classes.userDetail}>
-            <div className={classes.fieldName}>Email</div>
-            <div className={classes.fieldValue}>{email}</div>
-          </div>
-          <div className={classes.secondaryDetails}>
-            <div>
-              <div className={classes.fieldName}>Gender</div>
-              <div className={classes.fieldValue}>{gender}</div>
-            </div>
-            <div>
-              <div className={classes.fieldName}>Date of birth</div>
-              <div className={classes.fieldValue}>{dateOfBirth}</div>
-            </div>
-          </div>
-        </div>
-        <Link to="/interests">
-          <Button>Continue</Button>
-        </Link>
+        <Typography variant="subtitle1" className={classes.subTitle}>
+          Info is taken from profile. Visit profile to change the details.
+        </Typography>
       </div>
-    );
-  }
-
-  return <div />;
+      <div className={classes.userDetails}>
+        <div className={classes.userDetail}>
+          <div className={classes.fieldName}>Full name</div>
+          <div className={classes.fieldValue}>{name}</div>
+        </div>
+        <div className={classes.userDetail}>
+          <div className={classes.fieldName}>Mobile no</div>
+          <div className={classes.fieldValue}>{mobileNumber}</div>
+        </div>
+        <div className={classes.userDetail}>
+          <div className={classes.fieldName}>Email</div>
+          <div className={classes.fieldValue}>{email}</div>
+        </div>
+        <div className={classes.secondaryDetails}>
+          <div>
+            <div className={classes.fieldName}>Gender</div>
+            <div className={classes.fieldValue}>{gender}</div>
+          </div>
+          <div>
+            <div className={classes.fieldName}>Date of birth</div>
+            <div className={classes.fieldValue}>{dateOfBirth}</div>
+          </div>
+        </div>
+      </div>
+      <Button to="/interests">Continue</Button>
+    </div>
+  );
 };
 
 export default UserDetails;

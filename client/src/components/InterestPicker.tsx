@@ -5,10 +5,11 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
-import { StyledButton as Button } from "../styles";
+import Button from "./NavButton";
 import { useForm } from "../context/form";
-import { Link } from "react-router-dom";
 import * as actions from "../actionTypes";
+import { getInterests } from "../api";
+import { Interest } from "../types";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,7 +43,8 @@ const useStyles = makeStyles(theme => ({
     fontWeight: "normal",
     fontSize: "arem",
     lineHeight: "2rem",
-    color: "#6B6B6B"
+    color: "#6B6B6B",
+    textTransform: "capitalize"
   },
   checkbox: {
     paddingRight: "0.2rem",
@@ -62,18 +64,16 @@ const InterestPicker: React.FC<IProps> = props => {
 
   const { interests } = state;
 
-  const [choices] = React.useState<Array<string>>([
-    "Any one from below",
-    "Children and Youth",
-    "Civic Sense",
-    "Education and Literacy",
-    "Environment",
-    "Healthcare",
-    "People with Disabilities",
-    "Road safety and Traffic",
-    "Women Empowerment",
-    "Old age care "
-  ]);
+  const [choices, setChoices] = React.useState<Array<Interest>>([]);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const result = await getInterests();
+      setChoices(result);
+    };
+
+    fetchData();
+  }, []);
 
   const handleCheck = React.useCallback(
     (e, x) => {
@@ -97,27 +97,28 @@ const InterestPicker: React.FC<IProps> = props => {
         </div>
         <FormControl component="fieldset">
           <FormGroup className={classes.interests}>
-            {choices.map((choice: string) => (
-              <FormControlLabel
-                classes={{ root: classes.field, label: classes.label }}
-                key={choice}
-                control={
-                  <Checkbox
-                    className={classes.checkbox}
-                    checked={interests.includes(choice)}
-                    onChange={e => handleCheck(e, choice)}
-                    color="default"
-                    value={choice}
-                  />
-                }
-                label={choice}
-              />
-            ))}
+            {choices.length > 0 &&
+              choices.map((choice: Interest) => (
+                <FormControlLabel
+                  classes={{ root: classes.field, label: classes.label }}
+                  key={choice.id}
+                  control={
+                    <Checkbox
+                      className={classes.checkbox}
+                      checked={interests.includes(choice.id)}
+                      onChange={e => handleCheck(e, choice.id)}
+                      color="default"
+                      value={choice.id}
+                    />
+                  }
+                  label={choice.name}
+                />
+              ))}
           </FormGroup>
         </FormControl>
-        <Link to="/type">
-          <Button disabled={interests.length === 0}>Save & Continue</Button>
-        </Link>
+        <Button to="/type" disabled={interests.length === 0}>
+          Save & Continue
+        </Button>
       </div>
     </div>
   );

@@ -28,6 +28,10 @@ const StyledButton = withStyles({
   label: {
     fontSize: "1rem",
     textTransform: "capitalize"
+  },
+  disabled: {
+    background: "#b3b3b3",
+    color: "#bbb"
   }
 })((props: ButtonProps) => (
   <Button disableRipple disableFocusRipple color="default" {...props} />

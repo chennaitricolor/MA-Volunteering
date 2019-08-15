@@ -20,9 +20,9 @@ export interface Action {
 export type Dispatch = (action: Action) => void;
 
 export type FormState = {
-  currentUser: User | null;
+  currentUser: User;
   error: boolean;
-  interests: Array<string>;
+  interests: Array<number>;
   notify: boolean;
   type: string;
   errorMessage: string;

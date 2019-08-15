@@ -19,3 +19,5 @@ const getOrgs = async () => {
     console.log(err);
   }
 };
+
+export { getInterests, getOrgs };
