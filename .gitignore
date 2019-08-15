@@ -22,3 +22,4 @@ api/dist
 # config
 client/src/config/firebase.js
 api/ormconfig.js
+client/.env
