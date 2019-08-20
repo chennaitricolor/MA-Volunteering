@@ -1,23 +1,22 @@
 import axios from "axios";
-
-const apiUrl = process.env.REACT_APP_API_URL;
+import { CreateVolunteerDTO } from "../types";
 
 const getInterests = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/interest`);
+    const response = await axios.get(`/api/interest`);
     return response.data;
   } catch (err) {
     console.log(err);
   }
 };
 
-const getOrgs = async () => {
+const register = async (details: CreateVolunteerDTO) => {
   try {
-    const response = await axios.get(`${apiUrl}/org`);
+    const response = await axios.post(`/api/register`, details);
     return response.data;
   } catch (err) {
     console.log(err);
   }
 };
 
-export { getInterests, getOrgs };
+export { getInterests, register };

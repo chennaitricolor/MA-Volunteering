@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Radio, { RadioProps } from "@material-ui/core/Radio";
 import Button, { ButtonProps } from "@material-ui/core/Button";
+import TextField, { TextFieldProps } from "@material-ui/core/TextField";
 
 const StyledRadio = withStyles({
   root: {
@@ -37,4 +38,17 @@ const StyledButton = withStyles({
   <Button disableRipple disableFocusRipple color="default" {...props} />
 ));
 
-export { StyledRadio, StyledButton };
+const StyledTextField = withStyles({
+  root: {
+    "& label.Mui-focused": {
+      color: "#1366D2"
+    },
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "#1366D2"
+      }
+    }
+  }
+})((props: TextFieldProps) => <TextField {...props} />);
+
+export { StyledRadio, StyledButton, StyledTextField };

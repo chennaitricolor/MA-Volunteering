@@ -5,7 +5,11 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { StyledRadio, StyledButton as Button } from "../styles";
+import {
+  StyledRadio,
+  StyledButton as Button,
+  StyledTextField as TextField
+} from "../styles";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "../context/form";
 import * as actions from "../actionTypes";
@@ -29,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "30px 30px 0px 0px",
     background: "#F8F8F8",
     display: "grid",
-    gridAutoRows: "auto 0.5fr 1fr"
+    gridAutoRows: "auto 1fr 0.1fr"
   },
   group: {
     margin: "2em 0"
@@ -44,7 +48,13 @@ const useStyles = makeStyles(theme => ({
     color: "#6B6B6B"
   },
   checkboxField: {
-    margin: "auto 0 1.75em 0"
+    margin: "auto 0 0.75em 0"
+  },
+  prevOrg: {
+    backgroud: "#6B6B6B"
+  },
+  input: {
+    margin: theme.spacing(1)
   },
   checkbox: {
     paddingRight: "0.2rem",
@@ -64,7 +74,9 @@ const TypePicker: React.FC<IProps> = props => {
 
   const classes = useStyles();
 
-  const { type, notify } = state;
+  const { type, notify, prevOrg } = state;
+
+  const [history, setHistory] = React.useState<boolean>(false);
 
   const { submit } = props;
 
@@ -75,9 +87,16 @@ const TypePicker: React.FC<IProps> = props => {
     [dispatch]
   );
 
-  const handleChange = React.useCallback(
+  const setType = React.useCallback(
     (event): void => {
       dispatch({ type: actions.SET_TYPE, payload: event.target.value });
+    },
+    [dispatch]
+  );
+
+  const handleChange = React.useCallback(
+    (event): void => {
+      dispatch({ type: actions.SET_PREV_ORG, payload: event.target.value });
     },
     [dispatch]
   );
@@ -97,7 +116,7 @@ const TypePicker: React.FC<IProps> = props => {
               name="type"
               className={classes.group}
               value={type}
-              onChange={e => handleChange(e)}
+              onChange={e => setType(e)}
             >
               <FormControlLabel
                 classes={{ root: classes.field, label: classes.label }}
@@ -123,6 +142,30 @@ const TypePicker: React.FC<IProps> = props => {
               control={
                 <Checkbox
                   className={classes.checkbox}
+                  checked={history}
+                  onChange={e => setHistory(!history)}
+                  color="default"
+                />
+              }
+              label="I have vounteered in the past"
+            />
+            {history && (
+              <FormControl>
+                <TextField
+                  label="Volunteered Organisation"
+                  className={classes.input}
+                  value={prevOrg}
+                  onChange={e => handleChange(e)}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </FormControl>
+            )}
+            <FormControlLabel
+              classes={{ root: classes.checkboxField, label: classes.label }}
+              control={
+                <Checkbox
+                  className={classes.checkbox}
                   checked={notify}
                   onChange={e => setNotify(!notify)}
                   color="default"
@@ -132,7 +175,9 @@ const TypePicker: React.FC<IProps> = props => {
             />
           </FormGroup>
         </FormControl>
-        <Button onClick={e => submit(e)}>Submit</Button>
+        <Button disabled={history && !prevOrg} onClick={e => submit(e)}>
+          Submit
+        </Button>
       </div>
     </div>
   );

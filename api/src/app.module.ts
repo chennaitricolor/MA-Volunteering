@@ -5,14 +5,20 @@ import { AppService } from './app.service';
 import { Connection } from 'typeorm';
 import { InterestModule } from './interest/interest.module';
 import { VolunteerModule } from './volunteer/volunteer.module';
-import { OrgModule } from './org/org.module';
-
+import { Volunteer } from './volunteer/volunteer.entity';
+import { Interest } from './interest/interest.entity';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
+    TypeOrmModule.forFeature([Volunteer]),
+    TypeOrmModule.forFeature([Interest]),
     InterestModule,
     VolunteerModule,
-    OrgModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'client', 'build'),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -11,3 +11,7 @@ export const SET_INTERESTS = "SET_INTERESTS";
 export const SET_TYPE = "SET_TYPE";
 
 export const SET_NOTIFY = "SET_NOTIFY";
+
+export const SET_PREV_ORG = "SET_PREV_ORG";
+
+export const SET_ANY_INTEREST = "SET_ANY_INTEREST";

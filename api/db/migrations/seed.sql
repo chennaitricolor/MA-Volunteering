@@ -3,7 +3,6 @@
 insert into interest
   (name)
 values
-  ('any from below'),
   ('children and youth'),
   ('civic sense'),
   ('education and literacy'),
@@ -13,9 +12,3 @@ values
   ('road safety and traffic'),
   ('women empowerment'),
   ('old age care ');
-
--- Available orgs
-insert into org
-  (name)
-values
-  ('Tech for cities');

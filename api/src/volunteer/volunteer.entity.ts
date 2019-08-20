@@ -1,21 +1,22 @@
 import {
   Entity,
   Column,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
+  Generated,
   ManyToMany,
   JoinTable,
 } from 'typeorm';
 
 import { Interest } from '../interest/interest.entity';
-import { Org } from '../org/org.entity';
 import { Term } from '../types';
 
 @Entity()
 export class Volunteer {
-  @PrimaryGeneratedColumn()
+  @Column({ unique: true })
+  @Generated('increment')
   id: number;
 
-  @Column('text')
+  @PrimaryColumn('text')
   email: string;
 
   @Column('boolean')
@@ -28,11 +29,20 @@ export class Volunteer {
   })
   term: Term;
 
-  @ManyToMany(type => Org, { cascade: true })
-  @JoinTable()
-  orgs: Org[];
+  @Column('text')
+  prevOrg: string;
 
   @ManyToMany(type => Interest, { cascade: true })
-  @JoinTable()
+  @JoinTable({
+    name: 'volunteer_interest_xref',
+    joinColumn: {
+      name: 'volunteer',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'interest',
+      referencedColumnName: 'id',
+    },
+  })
   interests: Interest[];
 }

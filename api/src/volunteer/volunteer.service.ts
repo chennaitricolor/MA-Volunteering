@@ -11,7 +11,7 @@ export class VolunteerService {
   ) {}
 
   async findAll(): Promise<Volunteer[]> {
-    return await this.volunteerRepository.find();
+    return await this.volunteerRepository.find({ relations: ['interests'] });
   }
 
   async save(volunteer: Volunteer): Promise<Volunteer> {
@@ -27,6 +27,8 @@ export class VolunteerService {
   }
 
   async get(id): Promise<Volunteer> {
-    return await this.volunteerRepository.findOne(id);
+    return await this.volunteerRepository.findOne(id, {
+      relations: ['interests'],
+    });
   }
 }

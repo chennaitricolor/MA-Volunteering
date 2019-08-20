@@ -1,6 +1,3 @@
-import { IsNotEmpty } from 'class-validator';
-import { Interest } from '../interest/interest.entity';
-import { Org } from '../org/org.entity';
 import { Term } from '../types';
 
 export class CreateVolunteerDTO {
@@ -8,7 +5,9 @@ export class CreateVolunteerDTO {
   readonly notify: boolean;
   readonly term: Term;
 
-  readonly prevOrgs?: Org[];
+  readonly prevOrg: string;
 
-  readonly interests: Interest[] | [];
+  readonly anyInterestFlag: boolean;
+
+  readonly interests: number[] | [];
 }

@@ -62,7 +62,7 @@ const InterestPicker: React.FC<IProps> = props => {
 
   const classes = useStyles();
 
-  const { interests } = state;
+  const { interests, anyInterestFlag } = state;
 
   const [choices, setChoices] = React.useState<Array<Interest>>([]);
 
@@ -76,15 +76,24 @@ const InterestPicker: React.FC<IProps> = props => {
   }, []);
 
   const handleCheck = React.useCallback(
-    (e, x) => {
+    (e, x: number) => {
       const checkedValues =
         interests && interests.includes(x)
           ? interests.filter(c => c !== x)
           : [...interests, x];
 
       dispatch({ type: actions.SET_INTERESTS, payload: checkedValues });
+      dispatch({ type: actions.SET_ANY_INTEREST, payload: false });
     },
     [interests, dispatch]
+  );
+
+  const handleAnyInterest = React.useCallback(
+    e => {
+      dispatch({ type: actions.SET_ANY_INTEREST, payload: !anyInterestFlag });
+      dispatch({ type: actions.SET_INTERESTS, payload: [] });
+    },
+    [anyInterestFlag, dispatch]
   );
 
   return (
@@ -97,6 +106,20 @@ const InterestPicker: React.FC<IProps> = props => {
         </div>
         <FormControl component="fieldset">
           <FormGroup className={classes.interests}>
+            <FormControlLabel
+              classes={{ root: classes.field, label: classes.label }}
+              key="any"
+              control={
+                <Checkbox
+                  className={classes.checkbox}
+                  checked={anyInterestFlag}
+                  onChange={e => handleAnyInterest(e)}
+                  color="default"
+                  value={anyInterestFlag}
+                />
+              }
+              label="Any from below"
+            />
             {choices.length > 0 &&
               choices.map((choice: Interest) => (
                 <FormControlLabel
@@ -116,7 +139,10 @@ const InterestPicker: React.FC<IProps> = props => {
               ))}
           </FormGroup>
         </FormControl>
-        <Button to="/type" disabled={interests.length === 0}>
+        <Button
+          to="/type"
+          disabled={!anyInterestFlag && interests.length === 0}
+        >
           Save & Continue
         </Button>
       </div>

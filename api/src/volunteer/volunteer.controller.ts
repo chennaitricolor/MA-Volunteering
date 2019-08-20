@@ -19,13 +19,8 @@ export class VolunteerController {
     return this.volunteerService.findAll();
   }
 
-  @Post('create')
-  async create(@Body() volunteer: Volunteer): Promise<any> {
-    return this.volunteerService.save(volunteer);
-  }
-
-  @Get('/:id')
-  async getUser(@Param() id: string): Promise<any> {
-    return this.volunteerService.get(id);
+  @Get('/:email')
+  async getUser(@Param() email: string): Promise<any> {
+    return this.volunteerService.get(email);
   }
 }

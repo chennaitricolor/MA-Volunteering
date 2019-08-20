@@ -82,26 +82,24 @@ const AppBar: React.FC<IProps> = props => {
         </Typography>
         <Typography component="div">{activeStep}/3</Typography>
       </Toolbar>
-      {activeStep >= 2 && (
-        <Stepper
-          className={classes.stepper}
-          activeStep={activeStep}
-          alternativeLabel
-        >
-          {steps.map((step: string) => (
-            <Step key={step}>
-              <StepLabel
-                classes={{
-                  labelContainer: classes.stepperLabel,
-                  iconContainer: classes.stepIcon
-                }}
-              >
-                {""}
-              </StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      )}
+      <Stepper
+        className={classes.stepper}
+        activeStep={activeStep}
+        alternativeLabel
+      >
+        {steps.map((step: string) => (
+          <Step key={step}>
+            <StepLabel
+              classes={{
+                labelContainer: classes.stepperLabel,
+                iconContainer: classes.stepIcon
+              }}
+            >
+              {""}
+            </StepLabel>
+          </Step>
+        ))}
+      </Stepper>
     </StyledAppBar>
   );
 };

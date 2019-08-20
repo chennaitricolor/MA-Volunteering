@@ -20,7 +20,7 @@ const App: React.FC = () => {
 
   const [user] = useLocalStorage("user", JSON.stringify({}));
 
-  const { currentUser, interests } = state;
+  const { currentUser, interests, anyInterestFlag, success } = state;
 
   const handleSubmit = React.useCallback(
     event => {
@@ -36,7 +36,9 @@ const App: React.FC = () => {
     }
   }, [user, dispatch]);
 
-  if (!R.isEmpty(user)) {
+  if (success) {
+    return <div>User successfully registered as a volunteer!</div>;
+  } else if (user && user.email) {
     return (
       <div className="App">
         <Router>
@@ -52,7 +54,7 @@ const App: React.FC = () => {
             <Route
               path="/type/"
               render={() =>
-                !R.isEmpty(interests) ? (
+                anyInterestFlag || interests.length > 0 ? (
                   <TypePicker submit={handleSubmit} />
                 ) : (
                   <Redirect to="/" />
@@ -66,7 +68,7 @@ const App: React.FC = () => {
     );
   }
 
-  return <div>Error: User not register in the platform</div>;
+  return <div>Error: User not register in the CEP platform</div>;
 };
 
 export default App;

@@ -19,14 +19,34 @@ export interface Action {
 
 export type Dispatch = (action: Action) => void;
 
+export enum Term {
+  OneTime = "onetime",
+  ShortTerm = "shortterm",
+  LongTerm = "longterm"
+}
+
 export type FormState = {
   currentUser: User;
   error: boolean;
-  interests: Array<number>;
+  interests: number[];
   notify: boolean;
   type: string;
+  prevOrg: string;
   errorMessage: string;
   success: boolean;
+  anyInterestFlag: boolean;
+};
+
+export type CreateVolunteerDTO = {
+  email: string;
+  notify: boolean;
+  term: string;
+
+  prevOrg: string;
+
+  anyInterestFlag: boolean;
+
+  interests: number[] | [];
 };
 
 export type FormStateProviderProps = { children: React.ReactNode };

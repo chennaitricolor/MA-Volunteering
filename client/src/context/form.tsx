@@ -12,9 +12,11 @@ const initialState: FormState = {
   },
   error: false,
   errorMessage: "",
+  anyInterestFlag: false,
   success: false,
   interests: [],
   notify: false,
+  prevOrg: "",
   type: "onetime"
 };
 
@@ -30,6 +32,12 @@ function formReducer(state: FormState, action: Action) {
     }
     case actions.SET_INTERESTS: {
       return { ...state, interests: action.payload };
+    }
+    case actions.SET_PREV_ORG: {
+      return { ...state, prevOrg: action.payload };
+    }
+    case actions.SET_ANY_INTEREST: {
+      return { ...state, anyInterestFlag: action.payload };
     }
     case actions.SET_TYPE: {
       return { ...state, type: action.payload };
@@ -47,8 +55,7 @@ function formReducer(state: FormState, action: Action) {
       return {
         ...state,
         loading: false,
-        error: true,
-        errorMessage: action.payload
+        error: true
       };
     }
     default: {

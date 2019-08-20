@@ -56,11 +56,13 @@ _Development_
 
 _Production_
 
+_Note_: Run SPA's prod build before running this.
+
 ```
   yarn start:prod
 ```
 
-_Swagger_
+_API reference_
 
 ```
   http://localhost:3001/api
