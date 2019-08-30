@@ -3,7 +3,7 @@
 Stack:
 
 1. React with Typescript (SPA)
-2. NestJS framework (API)
+2. NestJS (API)
 3. Postgres (DB)
 
 Hosting: Firebase hosting

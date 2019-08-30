@@ -25,8 +25,7 @@ const useStyles = makeStyles(theme => ({
     flexFlow: "column"
   },
   button: {
-    width: "auto",
-    minWidth: "17rem",
+    maxWidth: "17rem",
     minHeight: "2.5rem"
   }
 }));

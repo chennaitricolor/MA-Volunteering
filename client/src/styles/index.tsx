@@ -17,11 +17,11 @@ const StyledRadio = withStyles({
 const StyledButton = withStyles({
   root: {
     margin: "1rem auto",
-    minWidth: "23rem",
     minHeight: "3.5rem",
     background: "#1366D2",
     borderRadius: "3rem",
-    width: "3rem",
+    width: "90%",
+    maxWidth: "23rem",
     height: "2rem",
     fontWeight: "bold",
     color: "#fff"
