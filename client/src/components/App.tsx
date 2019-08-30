@@ -9,6 +9,8 @@ import AppBar from "./AppBar";
 import UserDetails from "./UserDetails";
 import InterestPicker from "./InterestPicker";
 import TypePicker from "./TypePicker";
+import Success from "./SuccessScreen";
+import Error from "./ErrorScreen";
 import { useForm } from "../context/form";
 import { register } from "../context/actions";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -37,7 +39,7 @@ const App: React.FC = () => {
   }, [user, dispatch]);
 
   if (success) {
-    return <div>User successfully registered as a volunteer!</div>;
+    return <Success />;
   } else if (user && user.email) {
     return (
       <div className="App">
@@ -68,7 +70,7 @@ const App: React.FC = () => {
     );
   }
 
-  return <div>Error: User not register in the CEP platform</div>;
+  return <Error />;
 };
 
 export default App;
