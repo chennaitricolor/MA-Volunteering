@@ -24,11 +24,12 @@ Client side requires for `user` key stored in `localStorage`. Please initialize 
 
 ```
 
-{"name":"John Doe",
+localStorage.user = JSON.stringify({"name":"John Doe",
  "mobileNumber":"1234567890",
  "email":"abc123xyz@gmail.com",
  "gender":"Male",
- "dateOfBirth":"26 Aug 1998"}
+ "dateOfBirth":"26 Aug 1998"});
+
 
 ```
 
@@ -47,6 +48,12 @@ _Production_
 ```
 
 ### Server
+
+Rename `ormconfig.js.example` to `ormconfig.js`.
+
+`ormconfig.js` has to modified based on your DB connection settings.
+
+_NOTE_: Do not commit the `ormconfig.js` file.
 
 _Development_
 
