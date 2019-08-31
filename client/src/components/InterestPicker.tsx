@@ -52,6 +52,10 @@ const useStyles = makeStyles(theme => ({
     "&$checked": {
       color: "#2C67CB"
     }
+  },
+  error: {
+    color: "red",
+    margin: "2em"
   }
 }));
 
@@ -64,12 +68,18 @@ const InterestPicker: React.FC<IProps> = props => {
 
   const { interests, anyInterestFlag } = state;
 
+  const [error, setError] = React.useState<string>("");
+
   const [choices, setChoices] = React.useState<Array<Interest>>([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const result = await getInterests();
-      setChoices(result);
+      try {
+        const result = await getInterests();
+        setChoices(result);
+      } catch (err) {
+        setError(err.message);
+      }
     };
 
     fetchData();
@@ -96,6 +106,10 @@ const InterestPicker: React.FC<IProps> = props => {
     [anyInterestFlag, dispatch]
   );
 
+  if (error) {
+    return <div className={classes.error}>{error}</div>;
+  }
+
   return (
     <div className={classes.root}>
       <div className={classes.interestContainer}>
@@ -120,7 +134,8 @@ const InterestPicker: React.FC<IProps> = props => {
               }
               label="Any from below"
             />
-            {choices.length > 0 &&
+            {choices &&
+              choices.length > 0 &&
               choices.map((choice: Interest) => (
                 <FormControlLabel
                   classes={{ root: classes.field, label: classes.label }}

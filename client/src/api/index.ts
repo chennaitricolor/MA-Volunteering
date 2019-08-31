@@ -6,7 +6,8 @@ const getInterests = async () => {
     const response = await axios.get(`/api/interest`);
     return response.data;
   } catch (err) {
-    console.log(err);
+    console.log("Error occured fetching interests", err);
+    throw err;
   }
 };
 
@@ -15,7 +16,8 @@ const register = async (details: CreateVolunteerDTO) => {
     const response = await axios.post(`/api/register`, details);
     return response.data;
   } catch (err) {
-    console.log(err);
+    console.log("Error occured during register", err);
+    throw err;
   }
 };
 
