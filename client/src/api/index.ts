@@ -21,4 +21,14 @@ const register = async (details: CreateVolunteerDTO) => {
   }
 };
 
-export { getInterests, register };
+const getUserDetails = async (email: string) => {
+  try {
+    const response = await axios.get(`/api/user/${email}`);
+    return response.data;
+  } catch (err) {
+    console.log("Error occured during register", err);
+    throw err;
+  }
+};
+
+export { getInterests, register, getUserDetails };

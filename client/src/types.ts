@@ -35,6 +35,7 @@ export type FormState = {
   errorMessage: string;
   success: boolean;
   anyInterestFlag: boolean;
+  existingUser: boolean;
 };
 
 export type CreateVolunteerDTO = {

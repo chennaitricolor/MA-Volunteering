@@ -13,6 +13,7 @@ import Success from "./SuccessScreen";
 import Error from "./ErrorScreen";
 import { useForm } from "../context/form";
 import { register } from "../context/actions";
+import { getUserDetails } from "../api";
 import useLocalStorage from "../hooks/useLocalStorage";
 import * as actions from "../actionTypes";
 import * as R from "ramda";
@@ -33,8 +34,24 @@ const App: React.FC = () => {
   );
 
   React.useEffect(() => {
+    const fetchUserDetails = async (email: string) => {
+      try {
+        const volunteerDetails = await getUserDetails(email);
+
+        if (!R.isEmpty(volunteerDetails)) {
+          dispatch({
+            type: actions.SET_EXISTING_USER_DETAILS,
+            payload: volunteerDetails
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     if (!R.isEmpty(user)) {
       dispatch({ type: actions.SET_USER, payload: user });
+      fetchUserDetails(user.email);
     }
   }, [user, dispatch]);
 

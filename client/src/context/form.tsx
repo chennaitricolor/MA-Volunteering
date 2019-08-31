@@ -1,5 +1,6 @@
 import React from "react";
 import * as actions from "../actionTypes";
+import * as R from "ramda";
 import { FormState, FormStateProviderProps, Dispatch, Action } from "../types";
 
 const initialState: FormState = {
@@ -17,7 +18,8 @@ const initialState: FormState = {
   interests: [],
   notify: false,
   prevOrg: "",
-  type: "onetime"
+  type: "onetime",
+  existingUser: false
 };
 
 const FormStateContext = React.createContext<FormState>(initialState);
@@ -56,6 +58,19 @@ function formReducer(state: FormState, action: Action) {
         ...state,
         loading: false,
         error: true
+      };
+    }
+    case actions.SET_EXISTING_USER_DETAILS: {
+      // @ts-ignore
+      const { notifyFlag, prevOrg, term, interests } = action.payload;
+
+      return {
+        ...state,
+        existingUser: true,
+        notify: notifyFlag,
+        prevOrg,
+        interests: R.map(val => val.id, interests),
+        type: term
       };
     }
     default: {

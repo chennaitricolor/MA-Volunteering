@@ -26,7 +26,7 @@ Client side requires for `user` key stored in `localStorage`. Please initialize 
 
 localStorage.user = JSON.stringify({"name":"John Doe",
  "mobileNumber":"1234567890",
- "email":"abc123xyz@gmail.com",
+ "email":"kumaresh123@gmail.com",
  "gender":"Male",
  "dateOfBirth":"26 Aug 1998"});
 
@@ -49,11 +49,15 @@ _Production_
 
 ### Server
 
-Rename `ormconfig.js.example` to `ormconfig.js`.
+Make changes to `exports.sh` file under `api` folder with the required settings and run:
 
-`ormconfig.js` has to modified based on your DB connection settings.
+```
 
-_NOTE_: Do not commit the `ormconfig.js` file.
+. ./exports.sh
+
+```
+
+to export the ENV in user terminal before starting the server.
 
 _Development_
 

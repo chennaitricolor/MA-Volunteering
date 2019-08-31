@@ -9,6 +9,10 @@ import { Volunteer } from './volunteer/volunteer.entity';
 import { Interest } from './interest/interest.entity';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+
+// path of static assets
+const staticDir = process.env.STATIC_DIR;
+
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
@@ -17,7 +21,7 @@ import { join } from 'path';
     InterestModule,
     VolunteerModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', 'client', 'build'),
+      rootPath: staticDir || join(__dirname, '..', '..', 'client', 'build'),
     }),
   ],
   controllers: [AppController],

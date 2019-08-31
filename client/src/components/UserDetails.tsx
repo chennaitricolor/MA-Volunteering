@@ -62,6 +62,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: "1.1rem",
     lineHeight: "2rem",
     color: "#000000"
+  },
+  note: {
+    color: "red",
+    fontWeight: "bold"
   }
 }));
 
@@ -72,7 +76,7 @@ const UserDetails: React.FC<IProps> = () => {
 
   const [state] = useForm();
 
-  const { currentUser: user } = state;
+  const { currentUser: user, existingUser } = state;
 
   const { name, email, mobileNumber, gender, dateOfBirth } = user;
 
@@ -111,6 +115,14 @@ const UserDetails: React.FC<IProps> = () => {
             <div className={classes.fieldValue}>{dateOfBirth}</div>
           </div>
         </div>
+        {existingUser && (
+          <div>
+            <span className={classes.note}>Note: </span>
+            You've already registered as a volunteer. Please click on{" "}
+            <b>continue </b>
+            to modify your interests
+          </div>
+        )}
         <a className={classes.profileLink} href="/">
           Profile
         </a>

@@ -18,7 +18,3 @@ api/dist
 */npm-debug.log*
 */yarn-debug.log*
 */yarn-error.log*
-
-# config
-api/ormconfig.js
-client/.env.production
