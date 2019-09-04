@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  web:
+    build: "."
+    image: ma-volunteer-registration
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_HOST: # Your IP address
+      DATABASE_PORT: 5432
+      DATABASE: smartcity
+      DATABASE_USER: smartcity
+      DATABASE_PASSWORD: secret
+      STATIC_DIR: /home/node/app/dist/public

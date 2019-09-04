@@ -96,3 +96,12 @@ _Relations_
 Seed the DB using `api/db/migrations/seed.sql` manually
 
 TODO: Use typeorm to run seed migration
+
+_Docker_
+
+Modify `environment` in `docker-compose.yml` then run
+
+```
+  docker compose -d
+
+```
