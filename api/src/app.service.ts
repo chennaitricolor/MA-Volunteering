@@ -18,8 +18,9 @@ export class AppService {
     return 'Pong';
   }
 
-  async register(volunteer: CreateVolunteerDTO): Promise<Volunteer> {
+  async registerOrUpdate(volunteer: CreateVolunteerDTO): Promise<Volunteer> {
     const {
+      id,
       notify: notifyFlag,
       prevOrg,
       email,
@@ -27,6 +28,7 @@ export class AppService {
       interests,
       anyInterestFlag,
     } = volunteer;
+
     let allInterests = [];
 
     if (anyInterestFlag) {
@@ -39,6 +41,7 @@ export class AppService {
     }
 
     return await this.volunteerRepository.save({
+      id,
       notifyFlag,
       prevOrg,
       email,

@@ -12,7 +12,7 @@ export class AppController {
   }
 
   @Post('register')
-  async create(@Body() volunteer: CreateVolunteerDTO): Promise<any> {
-    return this.appService.register(volunteer);
+  async registerOrUpdate(@Body() volunteer: CreateVolunteerDTO): Promise<any> {
+    return this.appService.registerOrUpdate(volunteer);
   }
 }

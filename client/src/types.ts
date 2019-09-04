@@ -35,10 +35,11 @@ export type FormState = {
   errorMessage: string;
   success: boolean;
   anyInterestFlag: boolean;
-  existingUser: boolean;
+  existingUserId: number | null;
 };
 
 export type CreateVolunteerDTO = {
+  id: number | null;
   email: string;
   notify: boolean;
   term: string;

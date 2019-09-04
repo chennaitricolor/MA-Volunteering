@@ -19,7 +19,7 @@ const initialState: FormState = {
   notify: false,
   prevOrg: "",
   type: "onetime",
-  existingUser: false
+  existingUserId: null
 };
 
 const FormStateContext = React.createContext<FormState>(initialState);
@@ -62,11 +62,11 @@ function formReducer(state: FormState, action: Action) {
     }
     case actions.SET_EXISTING_USER_DETAILS: {
       // @ts-ignore
-      const { notifyFlag, prevOrg, term, interests } = action.payload;
+      const { id, notifyFlag, prevOrg, term, interests } = action.payload;
 
       return {
         ...state,
-        existingUser: true,
+        existingUserId: id,
         notify: notifyFlag,
         prevOrg,
         interests: R.map(val => val.id, interests),

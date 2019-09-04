@@ -11,18 +11,13 @@ const register = async (dispatch: Dispatch, state: FormState) => {
       notify,
       type,
       anyInterestFlag,
-      prevOrg
+      prevOrg,
+      existingUserId
     } = state;
     const { email } = currentUser;
-    console.log("Submitted Data", {
-      email,
-      interests,
-      notify,
-      prevOrg,
-      term: type,
-      anyInterestFlag
-    });
+
     const registeredUser = await registerApi({
+      id: existingUserId,
       email,
       interests,
       notify,
@@ -30,6 +25,7 @@ const register = async (dispatch: Dispatch, state: FormState) => {
       term: type,
       anyInterestFlag
     });
+
     dispatch({ type: actions.REGISTRATION_SUCCESS, payload: registeredUser });
   } catch (error) {
     console.log("Error", error);

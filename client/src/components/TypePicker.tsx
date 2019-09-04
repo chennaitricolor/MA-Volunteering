@@ -101,6 +101,13 @@ const TypePicker: React.FC<IProps> = props => {
     [dispatch]
   );
 
+  React.useEffect(() => {
+    if (prevOrg) {
+      setHistory(true);
+    }
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className={classes.root}>
       <div className={classes.interestContainer}>

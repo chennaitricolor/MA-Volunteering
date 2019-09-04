@@ -76,7 +76,7 @@ const UserDetails: React.FC<IProps> = () => {
 
   const [state] = useForm();
 
-  const { currentUser: user, existingUser } = state;
+  const { currentUser: user, existingUserId } = state;
 
   const { name, email, mobileNumber, gender, dateOfBirth } = user;
 
@@ -115,12 +115,12 @@ const UserDetails: React.FC<IProps> = () => {
             <div className={classes.fieldValue}>{dateOfBirth}</div>
           </div>
         </div>
-        {existingUser && (
+        {existingUserId && (
           <div>
             <span className={classes.note}>Note: </span>
             You've already registered as a volunteer. Please click on{" "}
             <b>continue </b>
-            to modify your interests
+            to modify your interests.
           </div>
         )}
         <a className={classes.profileLink} href="/">
