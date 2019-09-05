@@ -28,7 +28,6 @@ const register = async (dispatch: Dispatch, state: FormState) => {
 
     dispatch({ type: actions.REGISTRATION_SUCCESS, payload: registeredUser });
   } catch (error) {
-    console.log("Error", error);
     dispatch({ type: actions.REGISTRATION_FAILED, payload: error.message });
   }
 };

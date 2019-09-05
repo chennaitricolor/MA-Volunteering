@@ -56,8 +56,8 @@ function formReducer(state: FormState, action: Action) {
     case actions.REGISTRATION_FAILED: {
       return {
         ...state,
-        loading: false,
-        error: true
+        error: true,
+        errorMessage: action.payload
       };
     }
     case actions.SET_EXISTING_USER_DETAILS: {

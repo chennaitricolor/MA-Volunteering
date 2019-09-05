@@ -11,9 +11,10 @@ import InterestPicker from "./InterestPicker";
 import TypePicker from "./TypePicker";
 import Success from "./SuccessScreen";
 import Error from "./ErrorScreen";
+import Loading from "./LoadingScreen";
 import { useForm } from "../context/form";
 import { register } from "../context/actions";
-import { getUserDetails } from "../api";
+import { getUserDetails, auth as authApi } from "../api";
 import useLocalStorage from "../hooks/useLocalStorage";
 import * as actions from "../actionTypes";
 import * as R from "ramda";
@@ -21,7 +22,9 @@ import * as R from "ramda";
 const App: React.FC = () => {
   const [state, dispatch] = useForm();
 
-  const [user] = useLocalStorage("user", JSON.stringify({}));
+  const [loading, setLoading] = React.useState<boolean>(true);
+
+  const [user, setUser] = useLocalStorage("user", JSON.stringify({}));
 
   const { currentUser, interests, anyInterestFlag, success } = state;
 
@@ -34,18 +37,29 @@ const App: React.FC = () => {
   );
 
   React.useEffect(() => {
-    const fetchUserDetails = async (email: string) => {
+    const auth = async () => {
       try {
-        const volunteerDetails = await getUserDetails(email);
-
-        if (!R.isEmpty(volunteerDetails)) {
-          dispatch({
-            type: actions.SET_EXISTING_USER_DETAILS,
-            payload: volunteerDetails
-          });
-        }
+        const response = await authApi();
+        setUser(response);
       } catch (err) {
-        console.log(err);
+        console.log("Error authentication user!", err);
+      }
+      setLoading(false);
+    };
+
+    auth();
+    // eslint-disable-next-line
+  }, []);
+
+  React.useEffect(() => {
+    const fetchUserDetails = async (email: string) => {
+      const volunteerDetails = await getUserDetails(email);
+
+      if (!R.isNil(volunteerDetails) && !R.isEmpty(volunteerDetails)) {
+        dispatch({
+          type: actions.SET_EXISTING_USER_DETAILS,
+          payload: volunteerDetails
+        });
       }
     };
 
@@ -55,7 +69,9 @@ const App: React.FC = () => {
     }
   }, [user, dispatch]);
 
-  if (success) {
+  if (loading) {
+    return <Loading />;
+  } else if (success) {
     return <Success />;
   } else if (user && user.email) {
     return (

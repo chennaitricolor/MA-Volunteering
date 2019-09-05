@@ -63,7 +63,12 @@ const AppBar: React.FC<IProps> = props => {
 
   const steps = ["/", "/interests", "/type"];
 
-  const { location } = props;
+  const { location, history } = props;
+
+  React.useEffect(() => {
+    history.replace("/");
+    //eslint-disable-next-line
+  }, []);
 
   React.useEffect(() => {
     setActivestep(steps.indexOf(location.pathname) + 1);
