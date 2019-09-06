@@ -10,6 +10,8 @@ async function bootstrap() {
     cors: true,
   });
 
+  const port = process.env.SERVER_PORT || 80;
+
   app.use(compression());
   app.use(helmet());
 
@@ -25,6 +27,6 @@ async function bootstrap() {
 
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3001);
+  await app.listen(port);
 }
 bootstrap();

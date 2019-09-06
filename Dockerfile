@@ -28,4 +28,4 @@ WORKDIR /home/node/app
 
 CMD yarn start:prod
 
-EXPOSE 3001
+EXPOSE 80
