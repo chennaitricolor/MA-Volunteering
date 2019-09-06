@@ -5,7 +5,7 @@ services:
     build: "."
     image: ma-volunteer-registration
     ports:
-      - "3001:3001"
+      - "80:80" # Server Port
     environment:
       DATABASE_HOST: # Your IP address
       DATABASE_PORT: 5432
