@@ -37,7 +37,7 @@ const ErrorScreen: React.FC = () => {
     <div className={classes.root}>
       <ErrorOutline className={classes.icon} />
       <Typography component="h1" className={classes.title}>
-        User not register in the CEP platform!
+        User not registered in the Platform!
       </Typography>
       <div className={classes.buttonContainer}>
         <Button className={classes.button} href="/">
