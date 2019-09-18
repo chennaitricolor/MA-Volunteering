@@ -12,6 +12,7 @@
     "axios": "^0.19.0",
     "env-cmd": "^9.0.3",
     "firebase": "^6.3.0",
+    "moment": "^2.24.0",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -40,7 +41,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost",
+  "proxy": "http://localhost:3001",
   "devDependencies": {
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1"

@@ -69,7 +69,7 @@ function formReducer(state: FormState, action: Action) {
         existingUserId: id,
         notify: notifyFlag,
         prevOrg,
-        interests: R.map(val => val.id, interests),
+        interests: interests ? R.map(val => val.id, interests) : [],
         type: term
       };
     }

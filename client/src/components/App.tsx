@@ -11,12 +11,13 @@ import InterestPicker from "./InterestPicker";
 import TypePicker from "./TypePicker";
 import Success from "./SuccessScreen";
 import Error from "./ErrorScreen";
-import Loading from "./LoadingScreen";
 import { useForm } from "../context/form";
 import { register } from "../context/actions";
-import { getUserDetails, auth as authApi } from "../api";
+import Loading from "./LoadingScreen";
+import { getUserDetails } from "../api";
 import useLocalStorage from "../hooks/useLocalStorage";
 import * as actions from "../actionTypes";
+import { transformUserDetails } from "../utils";
 import * as R from "ramda";
 
 const App: React.FC = () => {
@@ -24,7 +25,7 @@ const App: React.FC = () => {
 
   const [loading, setLoading] = React.useState<boolean>(true);
 
-  const [user, setUser] = useLocalStorage("user", JSON.stringify({}));
+  const [user] = useLocalStorage("user", JSON.stringify({}));
 
   const { currentUser, interests, anyInterestFlag, success } = state;
 
@@ -35,21 +36,6 @@ const App: React.FC = () => {
     },
     [dispatch, state]
   );
-
-  React.useEffect(() => {
-    const auth = async () => {
-      try {
-        const response = await authApi();
-        setUser(response);
-      } catch (err) {
-        console.log("Error authentication user!", err);
-      }
-      setLoading(false);
-    };
-
-    auth();
-    // eslint-disable-next-line
-  }, []);
 
   React.useEffect(() => {
     const fetchUserDetails = async (email: string) => {
@@ -64,8 +50,13 @@ const App: React.FC = () => {
     };
 
     if (!R.isEmpty(user)) {
-      dispatch({ type: actions.SET_USER, payload: user });
-      fetchUserDetails(user.email);
+      const userData = transformUserDetails(user);
+
+      dispatch({ type: actions.SET_USER, payload: userData });
+
+      fetchUserDetails(userData.email);
+
+      setLoading(false);
     }
   }, [user, dispatch]);
 
@@ -73,7 +64,7 @@ const App: React.FC = () => {
     return <Loading />;
   } else if (success) {
     return <Success />;
-  } else if (user && user.email) {
+  } else if (currentUser && currentUser.email) {
     return (
       <div className="App">
         <Router>

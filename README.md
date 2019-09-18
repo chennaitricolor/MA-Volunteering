@@ -24,11 +24,12 @@ Client side requires for `user` key stored in `localStorage`. Please initialize 
 
 ```
 
-localStorage.user = JSON.stringify({"name":"John Doe",
- "mobileNumber":"1234567890",
- "email":"kumaresh123@gmail.com",
- "gender":"Male",
- "dateOfBirth":"26 Aug 1998"});
+localStorage.user = JSON.stringify({"user_phone_number":"1234567890",
+"user_id":"EABbI9VXXZMUK8pbuVJzkLlyYf12",
+"user_email":"abc@gmail.com",
+user_name":"John Doe",
+"user_dob":{"_seconds":810239100,"_nanoseconds":0},
+"user_gender":"MALE"});
 
 
 ```
