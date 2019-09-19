@@ -30,15 +30,28 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ErrorScreen: React.FC = () => {
+interface IProps {
+  errorMessage: string;
+  error?: any;
+  errorInfo?: any;
+}
+
+const ErrorScreen: React.FC<IProps> = ({ errorMessage, error, errorInfo }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <ErrorOutline className={classes.icon} />
       <Typography component="h1" className={classes.title}>
-        User not registered in the Platform!
+        {errorMessage}
       </Typography>
+      {errorInfo && (
+        <details style={{ whiteSpace: "pre-wrap" }}>
+          {error && error.toString()}
+          <br />
+          {errorInfo.componentStack}
+        </details>
+      )}
       <div className={classes.buttonContainer}>
         <Button className={classes.button} href="/">
           Back to App

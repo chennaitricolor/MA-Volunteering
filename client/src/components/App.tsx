@@ -94,7 +94,12 @@ const App: React.FC = () => {
     );
   }
 
-  return <Error />;
+  return (
+    <Error
+      errorMessage="Authentication failed or User not registered in the Platform!
+  "
+    />
+  );
 };
 
 export default App;
