@@ -1,15 +1,10 @@
 import React from "react";
 import StyledAppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import ArrowBack from "@material-ui/icons/ArrowBackIos";
 import StepLabel from "@material-ui/core/StepLabel";
-import Typography from "@material-ui/core/Typography";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import { makeStyles } from "@material-ui/core/styles";
 import { withRouter, RouteComponentProps } from "react-router";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
   stepper: {
     background: "#1366D2",
-    padding: "0 1.5rem 1rem 1.5rem"
+    padding: "1.5rem 1.5rem 1rem 1.5rem"
   },
   stepperLabel: {
     display: "none"
@@ -76,17 +71,6 @@ const AppBar: React.FC<IProps> = props => {
 
   return (
     <StyledAppBar className={classes.appBar} position="relative">
-      <Toolbar className={classes.toolBar}>
-        <Link to={steps[activeStep - 2] || "/"}>
-          <IconButton className={classes.iconButton}>
-            <ArrowBack className={classes.backIcon} />
-          </IconButton>
-        </Link>
-        <Typography className={classes.title}>
-          Volunteer registration
-        </Typography>
-        <Typography component="div">{activeStep}/3</Typography>
-      </Toolbar>
       <Stepper
         className={classes.stepper}
         activeStep={activeStep}

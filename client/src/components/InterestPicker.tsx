@@ -13,7 +13,7 @@ import { Interest } from "../types";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: "85%",
+    height: "92%",
     background: "#1366D2"
   },
   heading: {

@@ -16,7 +16,7 @@ import * as actions from "../actionTypes";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: "85%",
+    height: "92%",
     background: "#1366D2"
   },
   heading: {

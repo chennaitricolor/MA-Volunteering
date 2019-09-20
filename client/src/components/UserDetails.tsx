@@ -6,7 +6,7 @@ import { useForm } from "../context/form";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: "85%",
+    height: "92%",
     background: "#1366D2"
   },
   heading: {
