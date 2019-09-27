@@ -107,7 +107,7 @@ const UserDetails: React.FC<IProps> = () => {
           </div>
           <div className={classes.userDetail}>
             <div className={classes.fieldName}>Email</div>
-            <div className={classes.fieldValue}>{email}</div>
+            <div className={classes.fieldValue}>{email || 'NA'}</div>
           </div>
           <div className={classes.userDetail}>
             <div className={classes.fieldName}>Gender</div>
