@@ -20,9 +20,9 @@ export interface Action {
 export type Dispatch = (action: Action) => void;
 
 export enum Term {
-  OneTime = "onetime",
-  ShortTerm = "shortterm",
-  LongTerm = "longterm"
+  OneTime = 'onetime',
+  ShortTerm = 'shortterm',
+  LongTerm = 'longterm',
 }
 
 export type FormState = {
@@ -40,7 +40,8 @@ export type FormState = {
 
 export type CreateVolunteerDTO = {
   id: number | null;
-  email: string;
+  phone: string;
+  email: string | null;
   notify: boolean;
   term: string;
 

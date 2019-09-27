@@ -17,6 +17,9 @@ export class Volunteer {
   id: number;
 
   @PrimaryColumn('text')
+  phone: string;
+
+  @Column('text')
   email: string;
 
   @Column('boolean')

@@ -1,6 +1,6 @@
-import * as actions from "../actionTypes";
-import { register as registerApi } from "../api";
-import { FormState, Dispatch } from "../types";
+import * as actions from '../actionTypes';
+import { register as registerApi } from '../api';
+import { FormState, Dispatch } from '../types';
 
 const register = async (dispatch: Dispatch, state: FormState) => {
   dispatch({ type: actions.REGISTRATION_REQUEST });
@@ -12,23 +12,30 @@ const register = async (dispatch: Dispatch, state: FormState) => {
       type,
       anyInterestFlag,
       prevOrg,
-      existingUserId
+      existingUserId,
     } = state;
-    const { email } = currentUser;
+    const { mobileNumber, email } = currentUser;
 
     const registeredUser = await registerApi({
       id: existingUserId,
+      phone: mobileNumber,
       email,
       interests,
       notify,
       prevOrg,
       term: type,
-      anyInterestFlag
+      anyInterestFlag,
     });
 
-    dispatch({ type: actions.REGISTRATION_SUCCESS, payload: registeredUser });
+    dispatch({
+      type: actions.REGISTRATION_SUCCESS,
+      payload: registeredUser,
+    });
   } catch (error) {
-    dispatch({ type: actions.REGISTRATION_FAILED, payload: error.message });
+    dispatch({
+      type: actions.REGISTRATION_FAILED,
+      payload: error.message,
+    });
   }
 };
 

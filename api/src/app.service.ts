@@ -21,6 +21,7 @@ export class AppService {
   async registerOrUpdate(volunteer: CreateVolunteerDTO): Promise<Volunteer> {
     const {
       id,
+      phone,
       notify: notifyFlag,
       prevOrg,
       email,
@@ -42,6 +43,7 @@ export class AppService {
 
     return await this.volunteerRepository.save({
       id,
+      phone,
       notifyFlag,
       prevOrg,
       email,

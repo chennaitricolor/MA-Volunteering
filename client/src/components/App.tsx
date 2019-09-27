@@ -1,31 +1,31 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
-} from "react-router-dom";
-import AppBar from "./AppBar";
-import UserDetails from "./UserDetails";
-import InterestPicker from "./InterestPicker";
-import TypePicker from "./TypePicker";
-import Success from "./SuccessScreen";
-import Error from "./ErrorScreen";
-import { useForm } from "../context/form";
-import { register } from "../context/actions";
-import Loading from "./LoadingScreen";
-import { getUserDetails } from "../api";
-import useLocalStorage from "../hooks/useLocalStorage";
-import * as actions from "../actionTypes";
-import { transformUserDetails } from "../utils";
-import * as R from "ramda";
+  Redirect,
+} from 'react-router-dom';
+import AppBar from './AppBar';
+import UserDetails from './UserDetails';
+import InterestPicker from './InterestPicker';
+import TypePicker from './TypePicker';
+import Success from './SuccessScreen';
+import Error from './ErrorScreen';
+import { useForm } from '../context/form';
+import { register } from '../context/actions';
+import Loading from './LoadingScreen';
+import { getUserDetails } from '../api';
+import useLocalStorage from '../hooks/useLocalStorage';
+import * as actions from '../actionTypes';
+import { transformUserDetails } from '../utils';
+import * as R from 'ramda';
 
 const App: React.FC = () => {
   const [state, dispatch] = useForm();
 
   const [loading, setLoading] = React.useState<boolean>(true);
 
-  const [user] = useLocalStorage("user", JSON.stringify({}));
+  const [user] = useLocalStorage('user', JSON.stringify({}));
 
   const { currentUser, interests, anyInterestFlag, success } = state;
 
@@ -38,13 +38,13 @@ const App: React.FC = () => {
   );
 
   React.useEffect(() => {
-    const fetchUserDetails = async (email: string) => {
-      const volunteerDetails = await getUserDetails(email);
+    const fetchUserDetails = async (mobileNumber: string) => {
+      const volunteerDetails = await getUserDetails(mobileNumber);
 
       if (!R.isNil(volunteerDetails) && !R.isEmpty(volunteerDetails)) {
         dispatch({
           type: actions.SET_EXISTING_USER_DETAILS,
-          payload: volunteerDetails
+          payload: volunteerDetails,
         });
       }
     };
@@ -54,7 +54,7 @@ const App: React.FC = () => {
 
       dispatch({ type: actions.SET_USER, payload: userData });
 
-      fetchUserDetails(userData.email);
+      fetchUserDetails(userData.mobileNumber);
 
       setLoading(false);
     }
@@ -64,30 +64,34 @@ const App: React.FC = () => {
     return <Loading />;
   } else if (success) {
     return <Success />;
-  } else if (currentUser && currentUser.email) {
+  } else if (currentUser && currentUser.mobileNumber) {
     return (
-      <div className="App">
+      <div className='App'>
         <Router>
           <AppBar />
           <Switch>
-            <Route path="/" exact render={() => <UserDetails />} />
+            <Route path='/' exact render={() => <UserDetails />} />
             <Route
-              path="/interests/"
+              path='/interests/'
               render={() =>
-                currentUser.email ? <InterestPicker /> : <Redirect to="/" />
+                currentUser.mobileNumber ? (
+                  <InterestPicker />
+                ) : (
+                  <Redirect to='/' />
+                )
               }
             />
             <Route
-              path="/type/"
+              path='/type/'
               render={() =>
                 anyInterestFlag || interests.length > 0 ? (
                   <TypePicker submit={handleSubmit} />
                 ) : (
-                  <Redirect to="/" />
+                  <Redirect to='/' />
                 )
               }
             />
-            <Route render={() => <Redirect to="/" />} />
+            <Route render={() => <Redirect to='/' />} />
           </Switch>
         </Router>
       </div>
@@ -96,8 +100,8 @@ const App: React.FC = () => {
 
   return (
     <Error
-      errorMessage="Authentication failed or User not registered in the Platform!
-  "
+      errorMessage='Authentication failed or User not registered in the Platform!
+  '
     />
   );
 };

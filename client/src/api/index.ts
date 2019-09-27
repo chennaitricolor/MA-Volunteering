@@ -1,5 +1,5 @@
-import axios from "axios";
-import { CreateVolunteerDTO } from "../types";
+import axios from 'axios';
+import { CreateVolunteerDTO } from '../types';
 
 const getInterests = async () => {
   const response = await axios.get(`/api/interest`);
@@ -11,12 +11,14 @@ const register = async (details: CreateVolunteerDTO) => {
   return response.data;
 };
 
-const getUserDetails = async (email: string) => {
+const getUserDetails = async (mobileNumber: string) => {
   try {
-    const response = await axios.get(`/api/user/${email}`);
+    const response = await axios.post(`/api/user`, {
+      phone: mobileNumber,
+    });
     return response.data;
   } catch (err) {
-    console.log("Error occured while fetching user details", err);
+    console.log('Error occured while fetching user details', err);
   }
 };
 

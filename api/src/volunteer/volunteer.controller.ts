@@ -1,6 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpCode } from '@nestjs/common';
 import { VolunteerService } from './volunteer.service';
 import { Volunteer } from './volunteer.entity';
+import { FindUserDTO } from '../dto/find-user-details.dto';
 
 @Controller('user')
 export class VolunteerController {
@@ -11,8 +12,10 @@ export class VolunteerController {
     return this.volunteerService.findAll();
   }
 
-  @Get('/:email')
-  async getUser(@Param() email: string): Promise<any> {
-    return this.volunteerService.get(email);
+  @Post()
+  @HttpCode(200)
+  async getUser(@Body() body: FindUserDTO): Promise<any> {
+    const { phone } = body;
+    return this.volunteerService.get(phone);
   }
 }
