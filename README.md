@@ -103,6 +103,6 @@ _Docker_
 Modify `environment` in `docker-compose.yml` then run
 
 ```
-  docker compose -d
+  docker-compose up -d
 
 ```
